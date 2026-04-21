@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head><title>KIgeezer - TikTok Callback</title></head>
+<body>
+<h1>TikTok Authorization Callback</h1>
+<p>This page handles TikTok OAuth callbacks for the KIgeezer Pipeline.</p>
+<script>
+// Capture the authorization code from URL and display it
+const params = new URLSearchParams(window.location.search);
+const code = params.get('code');
+const state = params.get('state');
+if (code) {
+    document.getElementById('result').innerHTML = 
+        '<h2>Authorization Code:</h2><textarea rows="5" cols="50" readonly>' + 
+        code + '</textarea><p>Copy this code and paste it in your KIgeezer Pipeline.</p>';
+}
+</script>
+<div id="result"><p>Waiting for TikTok authorization...</p></div>
+</body>
+</html>
