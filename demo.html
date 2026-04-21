@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KIgeezer Pipeline - TikTok Integration Demo</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 900px; margin: 40px auto; padding: 20px; background: #1a1a2e; color: #eee; }
+        h1 { color: #ff2d55; }
+        h2 { color: #25f4ee; border-bottom: 2px solid #25f4ee; padding-bottom: 8px; }
+        .step { background: #16213e; border-radius: 12px; padding: 20px; margin: 16px 0; border-left: 4px solid #ff2d55; }
+        .step-number { background: #ff2d55; color: white; border-radius: 50%; width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 12px; }
+        .btn { background: #ff2d55; color: white; border: none; padding: 12px 28px; border-radius: 8px; font-size: 16px; cursor: pointer; margin: 8px 4px; }
+        .btn:hover { background: #e0194a; }
+        .btn-secondary { background: #25f4ee; color: #000; }
+        .btn-secondary:hover { background: #1dd8cc; }
+        .status { padding: 12px; border-radius: 8px; margin: 12px 0; }
+        .status-ok { background: #0a3d0a; border: 1px solid #25f4ee; }
+        .status-wait { background: #3d3d0a; border: 1px solid #f4d025; }
+        .video-preview { background: #000; border-radius: 8px; padding: 40px; text-align: center; margin: 16px 0; }
+        .scope { display: inline-block; background: #25f4ee; color: #000; padding: 4px 12px; border-radius: 16px; margin: 4px; font-size: 14px; font-weight: bold; }
+        .scope-video { background: #ff2d55; color: white; }
+        code { background: #0d1117; padding: 2px 8px; border-radius: 4px; color: #25f4ee; }
+        pre { background: #0d1117; padding: 16px; border-radius: 8px; overflow-x: auto; color: #c9d1d9; }
+        #login-status, #upload-status, #publish-status { display: none; }
+    </style>
+</head>
+<body>
+    <h1>🤖 KIgeezer Pipeline - TikTok Integration</h1>
+    <p>Automated video creation and publishing to TikTok via Content Posting API</p>
+
+    <h2>🔐 Login Kit - TikTok Authentication</h2>
+    <div class="step">
+        <span class="step-number">1</span>
+        <strong>User clicks "Login with TikTok"</strong>
+        <br><br>
+        <button class="btn" onclick="simulateLogin()">Login with TikTok</button>
+        <div id="login-status" class="status status-ok">
+            ✅ User authenticated via TikTok OAuth 2.0 PKCE<br>
+            Scopes granted: <span class="scope">user.info.profile</span> <span class="scope">user.info.stats</span> <span class="scope scope-video">video.upload</span> <span class="scope scope-video">video.publish</span>
+        </div>
+    </div>
+
+    <h2>🎬 Content Posting API - Video Upload</h2>
+    <div class="step">
+        <span class="step-number">2</span>
+        <strong>Pipeline generates video and uploads to TikTok</strong>
+        <br><br>
+        <div class="video-preview">
+            🎥 Generated Video Preview<br>
+            <small>B-Roll clip (5-15s) + Voiceover + Text overlay</small>
+        </div>
+        <button class="btn" onclick="simulateUpload()">Upload Video to TikTok</button>
+        <div id="upload-status" class="status status-ok">
+            ✅ Video uploaded via Content Posting API<br>
+            <code>POST /v2/post/publish/video/upload/</code>
+        </div>
+    </div>
+
+    <h2>📤 Content Posting API - Video Publish</h2>
+    <div class="step">
+        <span class="step-number">3</span>
+        <strong>Human review → Publish to TikTok</strong>
+        <br><br>
+        <button class="btn btn-secondary" onclick="simulatePublish()">Publish after Review</button>
+        <div id="publish-status" class="status status-ok">
+            ✅ Video published to TikTok<br>
+            <code>POST /v2/post/publish/content/query/</code><br>
+            Status: PUBLISH_COMPLETE
+        </div>
+    </div>
+
+    <h2>📊 API Flow Summary</h2>
+    <div class="step">
+        <pre>
+1. User → "Login with TikTok" → OAuth 2.0 PKCE Auth
+2. Pipeline → Generate B-Roll + Voiceover + Text
+3. Pipeline → Upload video via Content Posting API
+4. Human  → Review and approve
+5. Pipeline → Publish video to TikTok
+        </pre>
+        <p>Domain: <code>kigeezer.com</code> | All content human-reviewed before publishing</p>
+    </div>
+
+    <script>
+        function simulateLogin() {
+            document.getElementById('login-status').style.display = 'block';
+        }
+        function simulateUpload() {
+            document.getElementById('upload-status').style.display = 'block';
+        }
+        function simulatePublish() {
+            document.getElementById('publish-status').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
